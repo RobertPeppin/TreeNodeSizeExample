@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:sf="clr-namespace:Syncfusion.XForms.TreeView;assembly=Syncfusion.SfTreeView.XForms" xmlns:treenodesizeexample="clr-namespace:TreeNodeSizeExample"
+             xmlns:local="clr-namespace:TreeNodeSizeExample"
+             mc:Ignorable="d"
+             BackgroundColor="Transparent"
+             x:Class="TreeNodeSizeExample.MainPage">
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <DataTemplate x:Key="GroupHeader">
+            <ViewCell>
+                <Grid
+                    x:Name="GroupHeader"
+                    ColumnSpacing="5"
+                    RowSpacing="0"
+                    WidthRequest="300"
+                    BackgroundColor="LightYellow">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="4"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="32" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="8" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="10,0,10,0"
+                        FontAttributes="Bold"
+                        HorizontalOptions="FillAndExpand"
+                        InputTransparent="True"
+                        Text="{Binding Header}"
+                        MaxLines="0"
+                        TextColor="Black"
+                        LineBreakMode="TailTruncation"
+                        VerticalOptions="CenterAndExpand"
+                        VerticalTextAlignment="Center">
+                    </Label>
+                </Grid>
+            </ViewCell>
+        </DataTemplate>
+        <DataTemplate x:Key="DocumentTemplate">
+            <ViewCell>
+                <Grid
+                    x:Name="DocumentTemplateGrid"
+                    Margin="0,0,0,1"
+                    BackgroundColor="Crimson"
+                    ColumnSpacing="0"
+                    HorizontalOptions="Fill"
+                    RowSpacing="0"
+                    VerticalOptions="FillAndExpand"
+                    WidthRequest="300">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="4" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="4" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <!--  Colour bars  -->
+                        <ColumnDefinition Width="10" />
+                        <!--  Favourite  -->
+                        <ColumnDefinition Width="32" />
+                        <!--  Details  -->
+                        <ColumnDefinition Width="*" />
+                        <!--  Scroll Title  -->
+                        <ColumnDefinition Width="48" />
+                        <!--<ColumnDefinition Width="{OnPlatform iOS='25', Android='25', UWP='41'}" />-->
+                    </Grid.ColumnDefinitions>
+
+                    <BoxView
+                        Grid.Row="0"
+                        Grid.RowSpan="5"
+                        Grid.Column="0"
+                        BackgroundColor="{DynamicResource activeHighlight}"
+                        HorizontalOptions="Start"
+                        IsVisible="{Binding IsChanged}"
+                        VerticalOptions="FillAndExpand"
+                        WidthRequest="5" />
+
+                    <BoxView
+                        Grid.Row="0"
+                        Grid.RowSpan="5"
+                        Grid.Column="0"
+                        BackgroundColor="Red"
+                        HorizontalOptions="End"
+                        IsVisible="{Binding IsReadAndSign}"
+                        VerticalOptions="FillAndExpand"
+                        WidthRequest="5" />
+
+                    <Label
+                        x:Name="TableTitleLabel"
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        MaxLines="0"
+                        FontAttributes="Bold"
+                        InputTransparent="True"
+                        LineBreakMode="WordWrap"
+                        Text="{Binding Header}"
+                        TextColor="Black">
+                    </Label>
+                </Grid>
+            </ViewCell>
+        </DataTemplate>
+        <DataTemplate x:Key="EmptyTemplate" x:Name="EmptyTemplate">
+            <ViewCell>
+                <Grid />
+            </ViewCell>
+        </DataTemplate>
+        <treenodesizeexample:TemplateSelector
+            x:Key="TreeNodeSelector"
+            x:Name="TreeNodeSelector"
+            DocumentGroupHeaderTemplate="{StaticResource GroupHeader}"
+            DocumentTemplate="{StaticResource DocumentTemplate}" 
+            EmptyTemplate="{StaticResource EmptyTemplate}"/>
+
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="*" ColumnDefinitions="4*, *" HorizontalOptions="Fill" VerticalOptions="Fill" RowSpacing="0" ColumnSpacing="0">
+        <sf:SfTreeView 
+            x:Name="TreeView"
+            BackgroundColor="Transparent"
+            Grid.Row="0" 
+            Grid.Column="0"
+            ExpanderWidth="16"
+            Indentation="16"
+            Margin="20"
+            IsAnimationEnabled="True"
+            ExpandActionTarget="Node"
+            NodeSizeMode="Dynamic"
+            ItemTemplate="{StaticResource TreeNodeSelector}"
+            ItemsSource="{Binding Groups}"
+            ChildPropertyName="Items"
+            AutoExpandMode="RootNodesExpanded"
+            ExpanderPosition="Start"
+            QueryNodeSize="TreeView_QueryNodeSize"/>
+
+        <StackLayout Grid.Column="1" Grid.Row="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Padding="8">
+            <Button x:Name="buttonBuildFirstTree"  Text="Build first Sample" Command="{Binding BuildFirstSet}" HorizontalOptions="Fill" IsEnabled="True"/>
+            <Button x:Name="buttonBuildSecondTree"  Text="Make entries bigger" Command="{Binding BuildSecondSet}" HorizontalOptions="Fill" IsEnabled="True"/>
+            <Button x:Name="buttonBuildThirdTree"  Text="Make entries smaller" Command="{Binding BuildThirdSet}" HorizontalOptions="Fill" IsEnabled="True"/>
+            <Button x:Name="buttonBuildFourthTree"  Text="Add entries" Command="{Binding BuildFourthSet}" HorizontalOptions="Fill" IsEnabled="True"/>
+        </StackLayout>
+    </Grid>
+
+</ContentPage>
