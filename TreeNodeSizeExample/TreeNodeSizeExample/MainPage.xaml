@@ -14,44 +14,44 @@
     <ContentPage.Resources>
         <DataTemplate x:Key="GroupHeader">
             <ViewCell>
-                <Grid
-                    x:Name="GroupHeader"
-                    ColumnSpacing="5"
-                    RowSpacing="0"
-                    WidthRequest="300"
-                    BackgroundColor="LightYellow">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="4"/>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="4"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="32" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="8" />
-                    </Grid.ColumnDefinitions>
+                <Frame Padding="0" CornerRadius="0" HasShadow="False" BorderColor="Black" BackgroundColor="Green">
+                    <Grid
+                        x:Name="GroupHeader"
+                        ColumnSpacing="5"
+                        RowSpacing="0"
+                        WidthRequest="300"
+                        BackgroundColor="LightYellow">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="4"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="4"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                    <Label
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Margin="10,0,10,0"
-                        FontAttributes="Bold"
-                        HorizontalOptions="FillAndExpand"
-                        InputTransparent="True"
-                        Text="{Binding Header}"
-                        MaxLines="0"
-                        TextColor="Black"
-                        LineBreakMode="TailTruncation"
-                        VerticalOptions="CenterAndExpand"
-                        VerticalTextAlignment="Center">
-                    </Label>
-                </Grid>
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="10,0,10,0"
+                            FontAttributes="Bold"
+                            HorizontalOptions="FillAndExpand"
+                            InputTransparent="True"
+                            Text="{Binding Header}"
+                            MaxLines="0"
+                            TextColor="Black"
+                            LineBreakMode="TailTruncation"
+                            VerticalOptions="CenterAndExpand"
+                            VerticalTextAlignment="Center">
+                        </Label>
+                    </Grid>
+                </Frame>
             </ViewCell>
         </DataTemplate>
         <DataTemplate x:Key="DocumentTemplate">
             <ViewCell>
-                <Grid
+                <Frame Padding="0" CornerRadius="0" HasShadow="False" BorderColor="Black" BackgroundColor="Blue">
+                    <Grid
                     x:Name="DocumentTemplateGrid"
                     Margin="0,0,0,1"
                     BackgroundColor="Crimson"
@@ -60,58 +60,29 @@
                     RowSpacing="0"
                     VerticalOptions="FillAndExpand"
                     WidthRequest="300">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="4" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="4" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <!--  Colour bars  -->
-                        <ColumnDefinition Width="10" />
-                        <!--  Favourite  -->
-                        <ColumnDefinition Width="32" />
-                        <!--  Details  -->
-                        <ColumnDefinition Width="*" />
-                        <!--  Scroll Title  -->
-                        <ColumnDefinition Width="48" />
-                        <!--<ColumnDefinition Width="{OnPlatform iOS='25', Android='25', UWP='41'}" />-->
-                    </Grid.ColumnDefinitions>
-
-                    <BoxView
-                        Grid.Row="0"
-                        Grid.RowSpan="5"
-                        Grid.Column="0"
-                        BackgroundColor="{DynamicResource activeHighlight}"
-                        HorizontalOptions="Start"
-                        IsVisible="{Binding IsChanged}"
-                        VerticalOptions="FillAndExpand"
-                        WidthRequest="5" />
-
-                    <BoxView
-                        Grid.Row="0"
-                        Grid.RowSpan="5"
-                        Grid.Column="0"
-                        BackgroundColor="Red"
-                        HorizontalOptions="End"
-                        IsVisible="{Binding IsReadAndSign}"
-                        VerticalOptions="FillAndExpand"
-                        WidthRequest="5" />
-
-                    <Label
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="4" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="4" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <!--  Details  -->
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <Label
                         x:Name="TableTitleLabel"
-                        Grid.Row="0"
-                        Grid.Column="2"
+                        Grid.Row="1"
+                        Grid.Column="0"
                         MaxLines="0"
                         FontAttributes="Bold"
                         InputTransparent="True"
                         LineBreakMode="WordWrap"
                         Text="{Binding Header}"
                         TextColor="Black">
-                    </Label>
-                </Grid>
+                        </Label>
+                    </Grid>
+                </Frame>
             </ViewCell>
         </DataTemplate>
         <DataTemplate x:Key="EmptyTemplate" x:Name="EmptyTemplate">
@@ -125,10 +96,9 @@
             DocumentGroupHeaderTemplate="{StaticResource GroupHeader}"
             DocumentTemplate="{StaticResource DocumentTemplate}" 
             EmptyTemplate="{StaticResource EmptyTemplate}"/>
-
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="*" ColumnDefinitions="4*, *" HorizontalOptions="Fill" VerticalOptions="Fill" RowSpacing="0" ColumnSpacing="0">
+    <Grid RowDefinitions="*" ColumnDefinitions="3*, *" HorizontalOptions="Fill" VerticalOptions="Fill" RowSpacing="0" ColumnSpacing="0">
         <sf:SfTreeView 
             x:Name="TreeView"
             BackgroundColor="Transparent"
