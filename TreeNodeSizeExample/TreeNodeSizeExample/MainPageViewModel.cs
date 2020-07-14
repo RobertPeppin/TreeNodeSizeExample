@@ -158,14 +158,12 @@ namespace TreeNodeSizeExample
 
         private void AddChildren(ITreeItem item)
         {
-            if (RNG.Next(0, 100) > 30)
+
+            item.Items.Add(new TreeItem()
             {
-                item.Items.Add(new TreeItem()
-                {
-                    Id = Guid.NewGuid(),
-                    Header = "New Item"
-                });
-            }
+                Id = Guid.NewGuid(),
+                Header = "New Item"
+            });
 
             foreach (var child in item.Items)
             {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Syncfusion.XForms.iOS.TreeView;
 using UIKit;
 
 namespace TreeNodeSizeExample.iOS
@@ -23,6 +24,7 @@ namespace TreeNodeSizeExample.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            SfTreeViewRenderer.Init();
             LoadApplication(new App());
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(App.SyncFusionKey);
             return base.FinishedLaunching(app, options);
